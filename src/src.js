@@ -1,5 +1,1 @@
-global.foo = () => {
-  const bar = {}
-  if (false) {}
-  return null
-}
+global.foo=()=>{return!1,null};
