@@ -2,7 +2,6 @@
 To run the test-case:
 ```bash
 git clone https://github.com/tex0l/bug-report-babel.git
-git checkout origin/other-bug
 npm install
 npm start
 cat build/dest.js
