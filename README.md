@@ -11,7 +11,7 @@ cat build/dest.js
 
 Input:
 ```javascript
-function test (arg) {
+function test () {
   if (false) return
   var i
   for (var l; i < l; i++) {}
@@ -21,10 +21,10 @@ function test (arg) {
 
 Actual output:
 ```javascript
-function test(arg){if(true)for(var i,l;i<undefined;i++);}
+function test(){if(true)for(var i,l;i<undefined;i++);}
 ```
 
 Expected output:
 ```javascript
-function test(arg){if(true)for(var i,l;i<l;i++);}
+function test(){if(true)for(var i,l;i<l;i++);}
 ```
