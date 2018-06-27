@@ -12,23 +12,20 @@ cat build/dest.js
 
 Input:
 ```javascript
-function TEST (arg) {
-  if (test) return
-  var selected
-  for (var i = 0, l = arg.length; i < l; i++) {
-    console.log(i)
-  }
+function test (arg) {
+  if (false) return
+  var i
+  for (var l; i < l; i++) {}
 }
+
 ```
 
 Actual output:
 ```javascript
-function TEST(arg){if(!test)for(var selected,i=0,l=arg.length;i<undefined;i++)console.log(i)}
-
+function test(arg){if(true)for(var i,l;i<undefined;i++);}
 ```
 
 Expected output:
 ```javascript
-function TEST(arg){if(!test)for(var selected,i=0,l=arg.length;i<l;i++)console.log(i)}
-
+function test(arg){if(true)for(var i,l;i<l;i++);}
 ```
