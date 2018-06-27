@@ -1,24 +1,43 @@
-'use strict'
-const rollup = require('rollup')
+const babel = require('@babel/core')
 const jetpack = require('fs-jetpack')
+const {promisify} = require('util')
+
+const babelTransform = promisify(babel.transformFile)
 
 const srcDir = jetpack.cwd('./src')
 const buildDir = jetpack.cwd('./build')
 
-const rollupOnlyBundle = async (srcPath, destPath) => {
+const minifyOptions = {
+  evaluate: true,
+  simplify: true,
+  mergeVars: true,
+  removeUndefined: true,
 
-  const bundle = await rollup.rollup({
-    input: srcPath
-  })
+  deadcode: false,
+  booleans: false,
+  builtIns: false,
+  consecutiveAdds: false,
+  flipComparisons: false,
+  guards: false,
+  infinity: false,
+  mangle: false,
+  memberExpressions: false,
+  numericLiterals: false,
+  propertyLiterals: false,
+  regexpConstructors: false,
+  replace: false,
+  simplifyComparisons: false,
+  typeConstructors: false,
+  undefinedToVoid: false
+}
 
-  await bundle.write({
-    format: 'cjs',
-    file: destPath,
+const babelBundle = async (srcPath, destPath) => {
+  const res = await babelTransform(srcPath, {
+    presets: [['minify', minifyOptions]]
   })
+  jetpack.write(destPath, res.code)
 }
 
 buildDir.dir('.', {empty: true})
 
-rollupOnlyBundle(srcDir.path('src.js'), buildDir.path('dest.js'))
-
-
+babelBundle(srcDir.path('src.js'), buildDir.path('dest.js'))
