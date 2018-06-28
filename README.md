@@ -12,19 +12,18 @@ cat build/dest.js
 Input:
 ```javascript
 function test () {
-  if (false) return
+  if (true) return
   var i
-  for (var l; i < l; i++) {}
+  for (var l=1; i < l; i++) {}
 }
-
 ```
 
 Actual output:
 ```javascript
-function test(){if(true)for(var i,l;i<undefined;i++);}
+function test(){if(false)for(var i,l=1;i<undefined;i++);}
 ```
 
 Expected output:
 ```javascript
-function test(){if(true)for(var i,l;i<l;i++);}
+function test(){if(false)for(var i,l=1;i<l;i++);}
 ```

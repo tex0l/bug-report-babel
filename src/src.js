@@ -1,5 +1,5 @@
 function test () {
-  if (false) return
+  if (true) return
   var i
-  for (var l; i < l; i++) {}
+  for (var l=1; i < l; i++) {}
 }
